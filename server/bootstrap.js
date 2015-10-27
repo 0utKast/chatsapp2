@@ -29,7 +29,7 @@ if (Meteor.isServer) {
       for (var i = 0; i < messages.length; i++) {
         Messages.insert(messages[i]);
       }
- 
+      messages.forEach(m => Messages.insert(m));
       var chats = [
         {
           name: 'Jesús Conde',
@@ -53,13 +53,12 @@ if (Meteor.isServer) {
         }
       ];
  
-      for (var i = 0; i < chats.length; i++) {
-        var message = Messages.findOne({ chatId: { $exists: false } });
-        var chat = chats[i];
-        chat.lastMessage = message;
-        var chatId = Chats.insert(chat);
-        Messages.update(message._id, { $set: { chatId: chatId } })
-      }
-    }
-  });
+      chats.forEach(chat => {
+        let message = Messages.findOne({ chatId: { $exists: false } });
+      chat.lastMessage = message;
+      let chatId = Chats.insert(chat);
+      Messages.update(message._id, { $set: { chatId: chatId } })
+    });
+  }
+});
 }
