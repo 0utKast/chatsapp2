@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "moment": "~2.10.6",
-    "meteor-client-side": "~1.2.0"
+    "meteor-client-side": "~1.2.0",
+    "angular-meteor": "~1.0.3"
   }
 }
